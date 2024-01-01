@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "./footer_link";
 import axios from "axios";
 import Getapp from "./gettheapp";
 import L_s from "./login_sign";
 const Login = () => {
+  const navigate = useNavigate();
   const [pass, setPass] = useState("");
   const [user, Setuser] = useState("");
   const [flag, setFlag] = useState(0);
@@ -38,7 +40,10 @@ const Login = () => {
           password: pass,
         },
       };
-      axios(con).then((resu) => localStorage.setItem("token", resu.data.token));
+      axios(con).then((resu) => {
+        localStorage.setItem("token", resu.data.token);
+        navigate("/");
+      });
     } else if (result_number) {
       console.log("number");
       const con = {
@@ -49,7 +54,10 @@ const Login = () => {
           password: pass,
         },
       };
-      axios(con).then((resu) => localStorage.setItem("token", resu.data.token));
+      axios(con).then((resu) => {
+        localStorage.setItem("token", resu.data.token);
+        navigate("/");
+      });
     } else if (result_username) {
       console.log("username");
       const con = {
@@ -60,7 +68,10 @@ const Login = () => {
           password: pass,
         },
       };
-      axios(con).then((resu) => localStorage.setItem("token", resu.data.token));
+      axios(con).then((resu) => {
+        localStorage.setItem("token", resu.data.token);
+        navigate("/");
+      });
     }
   };
 

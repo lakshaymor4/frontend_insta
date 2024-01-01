@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import Signup from "./pages/signup.tsx";
 import "./index.css";
 import Login from "./pages/login.tsx";
+import Homepage from "./pages/homepage.tsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Birthday from "./pages/birthday.tsx";
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/birthday",
     element: <Birthday />,
+  },
+  {
+    path: "/",
+    element: <Homepage />,
   },
 ]);
 
