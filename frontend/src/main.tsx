@@ -5,9 +5,10 @@ import Signup from "./pages/signup.tsx";
 import "./index.css";
 import Login from "./pages/login.tsx";
 import Homepage from "./pages/homepage.tsx";
-
+import Home_page from "./pages/instagram.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Birthday from "./pages/birthday.tsx";
+import Email from "./pages/email.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Homepage />,
+  },
+  {
+    path: "/email",
+    element: <Email />,
   },
 ]);
 

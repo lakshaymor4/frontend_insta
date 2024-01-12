@@ -1,9 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Getapp from "./gettheapp";
 import L_s from "./login_sign";
+
 const Signup = () => {
+  const navigate = useNavigate();
   const [flag, setFlag] = useState(0);
   const [numorem, setnumorem] = useState("");
   const [username, setUsername] = useState("");
@@ -35,23 +38,27 @@ const Signup = () => {
   const handle_user = (e: any) => {
     setUsername(e.target.value);
     if (
-      password.length > 8 &&
+      password.length >= 8 &&
       username.length > 0 &&
       name.length > 0 &&
       numorem.length > 0
     ) {
       setFlag(1);
+    } else {
+      setFlag(0);
     }
   };
   const handle_pass = (e: any) => {
     setPass(e.target.value);
     if (
-      password.length > 8 &&
+      password.length >= 8 &&
       username.length > 0 &&
       name.length > 0 &&
       numorem.length > 0
     ) {
       setFlag(1);
+    } else {
+      setFlag(0);
     }
   };
   const handle_register = (e: any) => {
@@ -62,30 +69,35 @@ const Signup = () => {
     const result_number = numorem.match(pattern_number);
     if (result_email) {
       console.log("email");
-      const con = {
-        method: "post",
-        url: "http://localhost:3000/signup",
-        data: {
-          email: numorem,
-          password: password,
-          username: username,
-          fullname: name,
-        },
+      //  const con = {
+      //    method: "post",
+      //    url: "http://localhost:3000/signup",
+      //    data: {
+      //      email: numorem,
+      //      password: password,
+      //      username: username,
+      //      fullname: name,
+      //    },
+      //  };
+      //  axios(con).then((resu) =>
+      //    localStorage.setItem("token", resu.data.token)
+      //  );
+      const data = {
+        email: numorem,
+        password: password,
+        username: username,
+        fullname: name,
       };
-      axios(con).then((resu) => localStorage.setItem("token", resu.data.token));
+      navigate("/birthday", { state: data });
     } else if (result_number) {
       console.log("number");
-      const con = {
-        method: "post",
-        url: "http://localhost:3000/signup",
-        data: {
-          mobile: parseInt(numorem, 10),
-          password: password,
-          username: username,
-          fullname: name,
-        },
+      const data = {
+        mobile: parseInt(numorem, 10),
+        password: password,
+        username: username,
+        fullname: name,
       };
-      axios(con).then((resu) => localStorage.setItem("token", resu.data.token));
+      navigate("/birthday", { state: data });
     }
   };
   return (

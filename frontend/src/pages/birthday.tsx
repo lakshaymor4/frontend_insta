@@ -1,14 +1,40 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Getapp from "./gettheapp";
 import L_s from "./login_sign";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 const Birthday = () => {
+  const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [day, setDay] = useState(0);
+  const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
-  const [year, setYear] = useState(0);
-
+  const [year, setYear] = useState("");
+  const location = useLocation();
+  const data = location.state;
   const [flag, setFlag] = useState(0);
+  const handle_next = () => {
+    const dob = day + month + year;
+    const final_data = {
+      email: data.email,
+      password: data.password,
+      username: data.username,
+      fullname: data.fullname,
+      birth: dob,
+    };
+    navigate("/email", { state: final_data });
+    const con = {
+      method: "post",
+      data: {
+        email: data.email,
+      },
+      url: "http://localhost:3000/otp",
+    };
+    axios(con)
+      .then((resu) => console.log("Success"))
+      .catch((res) => console.log(res));
+  };
   var birth_year: number = 0;
   const b_month = (e: any) => {
     setMonth(e.target.value);
@@ -56,7 +82,7 @@ const Birthday = () => {
     } else if (currentMonth === 12) {
       setMonth("December");
     }
-    setDay(currentDate.getDate());
+    setDay(currentDate.getDate().toString());
   }, []);
   return (
     <>
@@ -275,13 +301,17 @@ const Birthday = () => {
                 type="submit"
                 className="w-[16.792rem] font-medium border-white border-2 bg-[#0095F6] text-white rounded-[0.7rem] pt-[0.3rem] pb-[0.3rem]"
                 id="login"
+                onClick={handle_next}
               >
                 Next
               </button>
             )}
           </div>
           <div className="mt-2 mb-4">
-            <a href="/" className="text-[#0095F6] font-semibold text-center">
+            <a
+              href="/signup"
+              className="text-[#0095F6] font-semibold text-center"
+            >
               Go back
             </a>
           </div>

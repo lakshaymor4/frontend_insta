@@ -70,6 +70,7 @@ const Login = () => {
       };
       axios(con).then((resu) => {
         localStorage.setItem("token", resu.data.token);
+        console.log(resu.data);
         navigate("/");
       });
     }
