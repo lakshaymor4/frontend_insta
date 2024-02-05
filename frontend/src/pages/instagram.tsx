@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { UseDispatch } from "react-redux";
+
 const Home_page = () => {
   const [flag_search, setFlag_search] = useState(0);
   const handle_width = (e: any) => {
