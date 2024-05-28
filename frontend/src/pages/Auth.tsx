@@ -33,6 +33,7 @@ const useAuth = () => {
           navigate("/login");
         } else {
           setProfile(response.data.profile_pic);
+          localStorage.setItem("profile_pic", response.data.profile_pic);
           setFullname(response.data.fullname);
           setUSername(response.data.username);
           setFlag(1);

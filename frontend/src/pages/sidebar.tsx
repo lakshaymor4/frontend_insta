@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import useAuth from "./Auth";
 
 const Sidebar = () => {
-  const { profile_pic } = useAuth();
+  const [profile_pic, setProfile] = useState(
+    "https://ik.imagekit.io/lakshay/default_profile.jpg?updatedAt=1704866851198"
+  );
+  useEffect(() => {
+    const storedProfilePic = localStorage.getItem("profile_pic");
+    if (storedProfilePic !== null) {
+      setProfile(storedProfilePic);
+    }
+  }, []);
   const [flag_search, setFlag_search] = useState(0);
   const handle_width = (e: any) => {
     document.querySelector("#kko")?.classList.add("w-[4.5rem]");

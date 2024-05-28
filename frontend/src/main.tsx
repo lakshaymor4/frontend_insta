@@ -9,6 +9,7 @@ import Home_page from "./pages/instagram.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Birthday from "./pages/birthday.tsx";
 import Email from "./pages/email.tsx";
+import Profile from "./pages/profile.tsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/email",
     element: <Email />,
+  },
+  {
+    path: "/:username",
+    element: <Profile />,
   },
 ]);
 
